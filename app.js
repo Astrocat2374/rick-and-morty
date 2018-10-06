@@ -1,15 +1,19 @@
-var input = document.querySelector('#search').value;
-var submit = document.querySelector('#submit-form').addEventListener('click', displayInput);
+const input = document.querySelector('#search');
+const submit = document.querySelector('#submit-form').addEventListener('click', displayInput);
 
 function displayInput(){
-    console.log('input', input);
+    console.log('input', input.value);
 }
 
 axios
-    .get('https://rickandmortyapi.com/api/character/')
+    .get('https://rickandmortyapi.com/api/character')
     .then((response)=>{
-        console.log(response);
+        console.log(response.data.results);
     })
     .catch((error)=>{
         console.log(error);
-    });
+});
+
+function renderResults(){
+
+}
