@@ -15,5 +15,11 @@ axios
 });
 
 function renderResults(){
-
+    axios
+     .get('https://rickandmortyapi.com/api/character')
+     .then((response)=>{
+         console.log(
+            response.data.results
+         );
+     })
 }
