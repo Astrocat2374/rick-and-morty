@@ -1,33 +1,33 @@
 const input = document.querySelector('#search');
 const submit = document.querySelector('#submit-form').addEventListener('click', renderResults);
-/*const cardTemplate = `
-    <div class = 'card'>
-        <h2>${response.name}</h2>
-        <h3>${response.species}</h3>
-        <h3>${response.type}</h3>
-        <h3>${response.status}</h3>
-    </div
-`;*/
 
 function displayInput(){
     console.log('input', input.value);
 }
 
-axios
-    .get('https://rickandmortyapi.com/api/character')
-    .then((response)=>{
-        console.log(response.data.results);
-    })
-    .catch((error)=>{
-        console.log(error);
-});
-
 function renderResults(){
     axios
-     .get('https://rickandmortyapi.com/api/character')
-     .then((response)=>{
-        console.log(input.value);
-        let displayName = (response.data.results).map(charname => charname.name.lastIndexOf(input.value));
-        console.log(displayName);
+    .get(`https://rickandmortyapi.com/api/character/?name=${input.value}`)
+    .then((response).map(x => {
+        console.log(
+            x.name,
+            x.species,
+            x.type,
+            x.status
+        )
+        let cardTemplate = `
+            <div class = 'card'>
+                <h2>${x.name}</h2>
+                <h3>${x.species}</h3>
+                <h3>${x.type}</h3>
+                <h3>${x.status}</h3>
+            </div
+        `;
+        let newCard = document.createElement('div');
+        cardTemplate.appendChild(newCard).className='card';
+        newCard.innerHTML = cardTemplate;
+    }))
+    .catch((error)=>{
+        console.log(error);
     })
 }
